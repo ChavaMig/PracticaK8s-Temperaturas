@@ -14,13 +14,26 @@ spec:
     spec:
       containers:
       - name: temperaturas-frontend
-        image: mm98zgz/temperaturas-frontend:v1
+        image: mm98zgz/temperaturas-frontend:v2
         ports:
         - containerPort: 3001
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "80m"
-          limits:
-            memory: "128Mi"
-            cpu: "250m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: temperaturas-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: temperaturas-backend
+  template:
+    metadata:
+      labels:
+        app: temperaturas-backend
+    spec:
+      containers:
+      - name: temperaturas-backend
+        image: mm98zgz/temperaturas-backend:v1
+        ports:
+        - containerPort: 5000
