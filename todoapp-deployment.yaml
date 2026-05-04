@@ -16,7 +16,7 @@ spec:
       - name: todo-app
         image: mm98zgz/todo-api:v1
         ports:
-        - containerPort: 3000
+        - containerPort: 5000
         resources:
           requests:
             memory: "64Mi"
