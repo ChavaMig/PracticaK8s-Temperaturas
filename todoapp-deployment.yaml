@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: todo-app
-        image: mm98zgz/todo-api:latest
+        image: mm98zgz/todo-api:v1
         ports:
         - containerPort: 3000
         resources:
