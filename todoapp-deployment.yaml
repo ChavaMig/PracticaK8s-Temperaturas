@@ -1,26 +1,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-app
+  name: temperaturas-frontend
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: todo-app
+      app: temperaturas-frontend
   template:
     metadata:
       labels:
-        app: todo-app
+        app: temperaturas-frontend
     spec:
       containers:
-      - name: todo-app
-        image: mm98zgz/todo-api:v1
+      - name: temperaturas-frontend
+        image: mm98zgz/temperaturas-frontend:v1
+        ports:
+        - containerPort: 3001
+        env:
+        - name: TEMP_SERVER
+          value: "temperaturas-backend:5000"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: temperaturas-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: temperaturas-backend
+  template:
+    metadata:
+      labels:
+        app: temperaturas-backend
+    spec:
+      containers:
+      - name: temperaturas-backend
+        image: mm98zgz/temperaturas-backend:v1
         ports:
         - containerPort: 5000
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "80m"
-          limits:
-            memory: "128Mi"
-            cpu: "250m"
