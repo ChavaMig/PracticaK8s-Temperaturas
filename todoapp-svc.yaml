@@ -1,12 +1,23 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: todo-app-srv
+  name: temperaturas-backend
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5000
+    targetPort: 5000
+  selector:
+    app: temperaturas-backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: temperaturas-srv
 spec:
   type: LoadBalancer
-  selector:
-    app: todo-app
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 5000
+  - port: 80
+    targetPort: 3001
+  selector:
+    app: temperaturas-frontend
